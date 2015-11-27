@@ -1,2 +1,3 @@
-# taominer.github.com
-Ethan's blog
+# Ethan Blog
+
+This is the first version!
