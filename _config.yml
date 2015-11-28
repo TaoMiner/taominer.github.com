@@ -1,83 +1,50 @@
-# Site settings
-title: Ethan's Blog
-SEOTitle: 曹艺馨的博客 | Ethan's Blog
-header-img: img/home-bg.jpg
-email: god13dog@163.com
-description: "关于机器学习、NLP | 曹艺馨 | 这里是 @曹艺馨THU 的个人博客，与你一起发现更大的世界。"
-keyword: "曹艺馨, Ethan"
-url: "http://taominer.github.io"              # your host, for absolute URL
-baseurl: ""                             # for example, '/blog' if your blog hosted on 'host/blog'
-
-
-
-# SNS settings
-RSS: false
-weibo_username:     god13dog@163.com
-#zhihu_username:     huxpro
-#github_username:    huxpro
-#twitter_username:  huxpro
-#facebook_username:  huxpro
-
-
-
-# Build settings
-highlighter: pygments
-permalink: pretty
+permalink: /:year/:month/:day/:title.html
 gems: [jekyll-paginate]
 paginate: 10
 paginate_path: "page:num"
-exclude: ["less","node_modules","Gruntfile.js","package.json","README.md"]
-anchorjs: true                          # if you want to customize anchor. check out line:181 of `post.html`
-
-
-
-# Markdown settings
-# replace redcarpet to kramdown,
-# although redcarpet can auto highlight code, the lack of header-id make the catalog impossible, so I switch to kramdown
-# document: http://jekyllrb.com/docs/configuration/#kramdown
 markdown: kramdown
 kramdown:
-  input: GFM                            # use Github Flavored Markdown !important
+  input: GFM  
 
+# 作者信息
+author: 
+  name: Ethan Cao
+  email: god13dog@163.com
+  link: http://taominer.github.com
+  weibo: http://weibo.com/1752135657
+  github: http://github.com/TaoMiner
+  # linkedin: https://www.linkedin.com/pub/anya-lin/81/91/232
 
+# 站点信息
+title: 曹艺馨的博客
+description: My personal blog
+url: http://taominer.github.io
+rss_url: /pages/atom.xml
 
-# Disqus settings
-#disqus_username: _your_disqus_short_name_
+# gavatar头像及Favicon
+gavatar: /public/img/ethan_avatar.jpg
+favicon: /public/img/ethan_avatar.jpg
 
-# Duoshuo settings
-# duoshuo_username: huxblog
-# Share component is depend on Comment so we can NOT use share only.
-# duoshuo_share: true                     # set to false if you want to use Comment without Sharing
+# google analytics 设置
+ga:
+  id: UA-70766178-1
+  url: taominer.github.io
 
+# disqus 设置
+disqus:
+  shortname: ethancao
 
+# 主题设置，自动激活某个标签
+active: 读书
 
+# 首页除了最新文章外显示分类
+cates: 
+  - Optimization
+  - LaTeX
 
-# Analytics settings
-# Baidu Analytics
-# ba_track_id: 4cc1f2d8f3067386cc5cdb626a202900
-# Google Analytics
-ga_track_id: 'UA-70766178-1'            # Format: UA-xxxxxx-xx
-ga_domain: taominer.github.io
-
-
-
-# Sidebar settings
-sidebar: true                           # whether or not using Sidebar.
-sidebar-about-description: "写写代码，做做设计，看看产品。世界那么大，我想去看看。"
-sidebar-avatar: /img/ethan_avatar.jpg      # use absolute URL, seeing it's used in both `/` and `/about/`
-
-
-
-# Featured Tags
-featured-tags: true                     # whether or not using Feature-Tags
-featured-condition-size: 1              # A tag will be featured if the size of it is more than this condition value
-
-
-
-# Friends
-friends: [
-    {
-        title: "天镶的博客",
-        href: "http://lingyu.wang/"
-    }
-]
+# 中文本地化
+locals:
+  tags: 标签
+  about: 关于
+  newest: 最新文章
+  archive: 归档
