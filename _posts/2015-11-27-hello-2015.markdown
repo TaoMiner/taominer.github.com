@@ -11,4 +11,8 @@ tags:
 
 > “Yeah It's on. ”
 
+this is the equation:
 
+$$
+E^2=\frac{1}{2}mc
+$$
