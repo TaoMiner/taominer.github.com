@@ -16,14 +16,16 @@ author:
   # linkedin: https://www.linkedin.com/pub/anya-lin/81/91/232
 
 # 站点信息
-title: 曹艺馨的博客
-description: My personal blog
+title: Ethan's Blog
+description: 机器学习爱好者
 url: http://taominer.github.io
-rss_url: /pages/atom.xml
+rss_url: /pages/feed.xml
+keyword: "机器学习"
 
-# gavatar头像及Favicon
-gavatar: /public/img/ethan_avatar.jpg
-favicon: /public/img/ethan_avatar.jpg
+# Sidebar settings
+sidebar: true                           # whether or not using Sidebar.
+sidebar-about-description: "写写代码，做做设计，看看产品。世界那么大，我想去看看。"
+sidebar-avatar: /public/img/ethan_avatar.jpg      # use absolute URL, seeing it's used in both `/` and `/about/`
 
 # google analytics 设置
 ga:
@@ -31,20 +33,8 @@ ga:
   url: taominer.github.io
 
 # disqus 设置
-disqus:
-  shortname: ethancao
-
-# 主题设置，自动激活某个标签
-active: 读书
-
-# 首页除了最新文章外显示分类
-cates: 
-  - Optimization
-  - LaTeX
-
-# 中文本地化
-locals:
-  tags: 标签
-  about: 关于
-  newest: 最新文章
-  archive: 归档
+# disqus_username: ethancao
+# Duoshuo settings
+duoshuo_username: ethancao
+# Share component is depend on Comment so we can NOT use share only.
+duoshuo_share: true                     # set to false if you want to use Comment without Sharing
