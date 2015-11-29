@@ -1,1 +1,1 @@
-借鉴了几个主题，
+借鉴了几个主题，感谢@gaohaoyang, @huxpro, @lay1010.
