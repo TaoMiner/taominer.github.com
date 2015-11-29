@@ -25,7 +25,7 @@ keyword: "机器学习"
 # Sidebar settings
 sidebar: true                           # whether or not using Sidebar.
 sidebar-about-description: "写写代码，做做设计，看看产品。世界那么大，我想去看看。"
-sidebar-avatar: /public/img/ethan_avatar.jpg      # use absolute URL, seeing it's used in both `/` and `/about/`
+sidebar-avatar: /public/img/ethan_avatar.png      # use absolute URL, seeing it's used in both `/` and `/about/`
 
 # google analytics 设置
 ga:
