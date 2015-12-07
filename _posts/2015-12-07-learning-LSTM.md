@@ -26,7 +26,7 @@ ANN网络中没有循环被称为FNN（Feedforword Neural Networks）。下图�
 
 
 
-MLP多层感知机是一种被广泛使用的FNN，网络中每一个节点都是一个perceptron。perceptron是一个最简单的人工神经网络模型，节点中使用的函数是线性模型，属于线性的二元分类器，感兴趣的同学可以去[wiki](https://zh.wikipedia.org/wiki/%E6%84%9F%E7%9F%A5%E5%99%A8)了解下。在MLP中，节点中可以使用哪些函数呢？比如常见的有： ![node_function](/Users/ethan/GitHub//public/img/posts/DPLearning/node_function.png)
+MLP多层感知机是一种被广泛使用的FNN，网络中每一个节点都是一个perceptron。perceptron是一个最简单的人工神经网络模型，节点中使用的函数是线性模型，属于线性的二元分类器，感兴趣的同学可以去[wiki](https://zh.wikipedia.org/wiki/%E6%84%9F%E7%9F%A5%E5%99%A8)了解下。在MLP中，节点中可以使用哪些函数呢？比如常见的有： ![node_function](/public/img/posts/DPLearning/node_function.png)
 
 1. 这个函数应该比较简单，符合单个神经元的特点，同时也没必要复杂，因为一个复杂的神经元又可以转换为若干个简单的神经元；
 2. 使用线性还是非线性的呢？这里我们再回头看一下网络图，除了节点中的运算，网络还存在另一种运算，即节点i到j的边上的运算。这个运算是简单的线性乘法: $a_j=\omega_{ij}b_i$，其中**a和b分别代表一个节点的输入和输出**。（牢记这个，否则下面的公式容易混）。因此，若节点中也使用线性函数，则整个网络结构无论怎么调整，依旧是线性函数。这大大限制了MLP的作用。所以使用非线性函数。
@@ -53,9 +53,14 @@ $$
 首先来看前向传播，假设MLP中第l隐藏层H中单元h，它的输入$a_h$、输出(激活值)$b_h$、映射(激活)函数$\theta_{h}$。参数节点i到j的权重为$w_{ij}$，则有：
 
 $$
-a_h=\mathop{\sum}_{h'\in H_{l-1}}w_{h'h}b_{h'}  \\
+a_h=\mathop{\sum}_{h'\in H_{l-1}}w_{h'h}b_{h'}
+$$
+
+$$
 b_h=\theta_h(a_h)
 $$
+
+
 
 #### input layer
 
@@ -66,8 +71,7 @@ $$
 输出层则略有不同，与任务目标相关。假设输出单元k的输入为$a_k$，激活值y，则当输出为二分类时，通常输出单元取sigmoid函数：
 
 $$
-p(C_1|x)=y=\sigma(a) \\
-p(C_2|x)=1-y
+p(C_1|x)=y=\sigma(a),p(C_2|x)=1-y
 $$
 
 其中$C_k$是类别标签。这其实就是一个*logistic regression(logit model)*，若使用z重新编码，z=1代表$C_1$；$z=0$代表$C_2$，则上式可重写为：
@@ -79,7 +83,7 @@ $$
 类似的，多分类时使用softmax函数：
 
 $$
-p(C_k|x)=y_k=\frac{e^{a_k}}{\sum_{k'=1}^Ke^{a_{k'}}} \\ p(z|x)=\prod_{k=1}^Ky_k^{z_k}
+p(C_k|x)=y_k=\frac{e^{a_k}}{\sum_{k'=1}^Ke^{a_{k'}}},p(z|x)=\prod_{k=1}^Ky_k^{z_k}
 $$
 
 也就是logistic regression在多项上的扩展，即*multinomial logit model*。
@@ -112,16 +116,21 @@ $$
 直观上来看$\mathcal{L}$是输出值和真实值的误差，因此是y的函数，然后通过y作用到输出单元的输入$a_k$，这样一直从后向前迭代，所以叫后向传播（BP）。BP其实就是**重复的应用chain rule**。我们还是按照输出单元的不同分别来看。首先是二分类：
 
 $$
-\frac{\partial \mathcal{L}(x,z)}{\partial y}=\frac{y-z}{y(1-y)} \\
+\frac{\partial \mathcal{L}(x,z)}{\partial y}=\frac{y-z}{y(1-y)}
+$$
+
+$$
 \frac{\partial \mathcal{L}(x,z)}{\partial a}=\frac{\partial \mathcal{L}(x,z)}{\partial y}\frac{\partial y}{\partial a}=y-z
 $$
+
+
 
 类似的，对于多分类：
 
 $$
 \frac{\partial \mathcal{L}}{\partial a_k}
-=\sum_{k'=1}^K\frac{\partial \mathcal{L}}{\partial y_{k'}} \frac{\partial y_{k'}}{\partial a_k} \\
-=\sum_{k'=1}^K -\frac{z_{k'}}{y_{k'}} (y_k\delta_{kk'}-y_ky_{k'}) \\
+=\sum_{k'=1}^K\frac{\partial \mathcal{L}}{\partial y_{k'}} \frac{\partial y_{k'}}{\partial a_k}
+=\sum_{k'=1}^K -\frac{z_{k'}}{y_{k'}} (y_k\delta_{kk'}-y_ky_{k'})
 =y_k-z_k
 $$
 
@@ -129,7 +138,7 @@ $$
 
 $$
 \Delta{w_{ij}}=-\alpha \frac{\partial \mathcal{L}(x,z)}{\partial w_{ij}}
-=-\alpha \frac{\partial \mathcal{L}}{\partial a_j}\frac{\partial a_j}{\partial w_{ij}} \\
+=-\alpha \frac{\partial \mathcal{L}}{\partial a_j}\frac{\partial a_j}{\partial w_{ij}}
 =-\alpha \delta_jb_i
 $$
 
@@ -142,8 +151,8 @@ $$
 这个我们只能从后向前依次求解，对于在最后的隐藏层单元h：
 
 $$
-\delta_{h-1} = \frac{\partial \mathcal{L}}{\partial b_{h-1}} \frac{\partial b_{h-1}}{\partial a_{h-1}} \\
-=\theta'(a_{h-1}) \sum_{h\in H_{h}} \frac{\partial \mathcal{L}}{\partial a_h} \frac{\partial a_h}{\partial b_{h-1}} \\
+\delta_{h-1} = \frac{\partial \mathcal{L}}{\partial b_{h-1}} \frac{\partial b_{h-1}}{\partial a_{h-1}}
+=\theta'(a_{h-1}) \sum_{h\in H_{h}} \frac{\partial \mathcal{L}}{\partial a_h} \frac{\partial a_h}{\partial b_{h-1}}
 =\theta'(a_{h-1}) \sum_{h\in H_{h}} \delta_h w_{(h-1)h}
 $$
 
@@ -174,9 +183,14 @@ $$
 从上图可以看出，前向传播的时候隐藏单元的输入多了一项：前一时刻隐藏单元的输出。故：
 
 $$
-a_h^t=\sum_{i=1}^Iw_{ih}x_i^t+\sum_{h'=1}^H w_{h'h}b_{h'}^{t-1} \\
+a_h^t=\sum_{i=1}^Iw_{ih}x_i^t+\sum_{h'=1}^H w_{h'h}b_{h'}^{t-1}
+$$
+
+$$
 b_h=\theta(a_h^t)
 $$
+
+
 
 #### output layer & loss function
 
@@ -288,9 +302,14 @@ LSTM相对于RNN只改动了隐藏单元为memory block，所以这里只给出m
 ##### input gate & forget gate (*=[$\iota|\phi$])
 
 $$
-a_*^t=\sum_{i=1}^I w_{i*} x_i^t+\sum_{h=1}^H w_{h*} b_h^{t-1}+\sum_{c=1}^C w_{c*} s_c^{t-1} \\
+a_*^t=\sum_{i=1}^I w_{i*} x_i^t+\sum_{h=1}^H w_{h*} b_h^{t-1}+\sum_{c=1}^C w_{c*} s_c^{t-1}
+$$
+
+$$
 b_*^t=f(a_*^t)
 $$
+
+
 
 隐藏单元的输入也可以同时确定：
 
@@ -307,9 +326,14 @@ $$
 于是，计算output gate，它与前两个gate的区别只在于peephole的状态可以使用当前时刻：
 
 $$
-a_\omega^t=\sum_{i=1}^I w_{i\omega} x_i^t+\sum_{h=1}^H w_{h\omega} b_h^{t-1}+\sum_{c=1}^C w_{c\omega} s_c^t \\
+a_\omega^t=\sum_{i=1}^I w_{i\omega} x_i^t+\sum_{h=1}^H w_{h\omega} b_h^{t-1}+\sum_{c=1}^C w_{c\omega} s_c^t
+$$
+
+$$
 b_\omega^t=f(a_\omega^t)
 $$
+
+
 
 最后，计算隐藏单元的输出：
 
@@ -326,9 +350,9 @@ LSTM的后向传播比较复杂，因此一般使用truncated bptt进行优化�
 首先引入第一个辅助变量，隐藏单元输出值的变化：
 
 $$
-\epsilon_c^t=\frac{\partial \mathcal{L}}{\partial b_c^t} \\
-=\sum_{k=1}^K\frac{\partial \mathcal{L}}{\partial a_k^t} \frac{\partial a_k^t}{\partial b_c^t}+\sum_{g=1}^G\frac{\partial \mathcal{L}}{\partial a_g^t} \frac{\partial a_g^t}{\partial b_c^t} \\
-=\sum_{k=1}^K w_{ck}\delta_k^t+\sum_{g=1}^Gw_{cg}\delta_g^{t+1} \\
+\epsilon_c^t=\frac{\partial \mathcal{L}}{\partial b_c^t}
+=\sum_{k=1}^K\frac{\partial \mathcal{L}}{\partial a_k^t} \frac{\partial a_k^t}{\partial b_c^t}+\sum_{g=1}^G\frac{\partial \mathcal{L}}{\partial a_g^t} \frac{\partial a_g^t}{\partial b_c^t}
+=\sum_{k=1}^K w_{ck}\delta_k^t+\sum_{g=1}^Gw_{cg}\delta_g^{t+1}
 \approx \sum_{k=1}^K w_{ck}\delta_k^t
 $$
 
@@ -337,8 +361,8 @@ $$
 接着来看output gate：
 
 $$
-\delta_\omega^t=\frac{\partial \mathcal{L}}{\partial a_\omega^t} \\
-=\sum_{c=1}^C \frac{\partial \mathcal{L}}{\partial b_c^t}\frac{\partial b_c^t}{\partial b_\omega^t}\frac{\partial b_\omega^t}{\partial a_\omega^t} \\
+\delta_\omega^t=\frac{\partial \mathcal{L}}{\partial a_\omega^t}
+=\sum_{c=1}^C \frac{\partial \mathcal{L}}{\partial b_c^t}\frac{\partial b_c^t}{\partial b_\omega^t}\frac{\partial b_\omega^t}{\partial a_\omega^t}
 =f'(a_\omega^t)\sum_{c=1}^C \epsilon_c^t h(s_c^t)
 $$
 
@@ -347,13 +371,15 @@ $$
 再来引入第二个辅助变量：
 
 $$
-\epsilon_s^t=\frac{\partial \mathcal{L}}{\partial s_c^t} \\
+\epsilon_s^t=\frac{\partial \mathcal{L}}{\partial s_c^t}
 =\frac{\partial \mathcal{L}}{\partial b_c^t} \frac{\partial b_c^t}{\partial h(s_c^t)} \frac{\partial h(s_c^t)}{\partial s_c^t} 
 +\frac{\partial \mathcal{L}}{\partial s_c^{t+1}} \frac{\partial s_c^{t+1}}{\partial s_c^t}
 +\frac{\partial \mathcal{L}}{\partial a_\omega^t} \frac{\partial a_\omega^t}{\partial s_c^t}
 +\frac{\partial \mathcal{L}}{\partial a_\iota^t} \frac{\partial a_\iota^t}{\partial s_c^t}
 +\frac{\partial \mathcal{L}}{\partial a_\phi^t} \frac{\partial a_\phi^t}{\partial s_c^t}
-\\
+$$
+
+$$
 =b_w^th'(s_c^t)\epsilon_c^t+b_\phi^{t+1}\epsilon_s^{t+1}+w_{c\omega}\delta_\omega^t+w_{c\iota}\delta_\iota^{t+1}+w_{c\phi}\delta_\phi^{t+1}
 $$
 
@@ -364,19 +390,22 @@ $$
 ##### cell
 
 $$
-\delta_c^t =\frac{\partial \mathcal{L}}{\partial a_c^t} \\
-=\frac{\partial \mathcal{L}}{\partial s_c^t}\frac{\partial s_c^t}{\partial g(a_c^t)}\frac{\partial g(a_c^t)}{\partial a_c^t} \\
+\delta_c^t =\frac{\partial \mathcal{L}}{\partial a_c^t}
+=\frac{\partial \mathcal{L}}{\partial s_c^t}\frac{\partial s_c^t}{\partial g(a_c^t)}\frac{\partial g(a_c^t)}{\partial a_c^t}
 =\epsilon_c^t b_\iota^t g'(a_c^t)
 $$
 
 ##### forget gate & input gate
 
 $$
-\delta_\phi^t =\frac{\partial \mathcal{L}}{\partial a_\phi^t} \\
-=\sum_{c=1}^C\frac{\partial \mathcal{L}}{\partial s_c^t}\frac{\partial s_c^t}{\partial b_\phi^t}\frac{\partial b_\phi^t}{\partial a_\phi^t} \\
-=f'(a_\phi^t)\sum_{c=1}^C s_c^{t-1}\epsilon_s^t \\
+\delta_\phi^t =\frac{\partial \mathcal{L}}{\partial a_\phi^t}
+=\sum_{c=1}^C\frac{\partial \mathcal{L}}{\partial s_c^t}\frac{\partial s_c^t}{\partial b_\phi^t}\frac{\partial b_\phi^t}{\partial a_\phi^t}
+=f'(a_\phi^t)\sum_{c=1}^C s_c^{t-1}\epsilon_s^t
+$$
 
-\delta_\iota^t =\frac{\partial \mathcal{L}}{\partial a_\iota^t} \\
-=\sum_{c=1}^C\frac{\partial \mathcal{L}}{\partial s_c^t}\frac{\partial s_c^t}{\partial b_\iota^t}\frac{\partial b_\iota^t}{\partial a_\iota^t} \\
+$$
+\delta_\iota^t =\frac{\partial \mathcal{L}}{\partial a_\iota^t}
+=\sum_{c=1}^C\frac{\partial \mathcal{L}}{\partial s_c^t}\frac{\partial s_c^t}{\partial b_\iota^t}\frac{\partial b_\iota^t}{\partial a_\iota^t}
 =f'(a_\iota^t)\sum_{c=1}^C g(a_c^{t-1})\epsilon_s^t
 $$
+
