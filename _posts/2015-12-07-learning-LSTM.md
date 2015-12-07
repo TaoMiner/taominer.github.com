@@ -277,8 +277,7 @@ $$
 \frac{\partial \delta_v^{t-q}}{\partial \delta_u^{t}}=\sum_{l_1=1}^n \dots \sum_{l_{q-1}=1}^n \prod_{m=1}^q \theta'(a_{l_m}^{t-m})w_{l_m l_{m-1}}
 $$
 
-定义后面的连乘项为T，则可以看出T有$n^{q-1}$项，因此当$|T|>1$时，误差会指数级增长；而$|T|<1$时，误差会指数级迅速消失。
-
+定义后面的连乘项为T，则可以看出T有$n^{q-1}$项。故，当|T|>1时，误差会指数级增长；而|T|<1,误差会指数级迅速消失。
 为了克服这个问题，其实也很简单。先假设仅仅有一个自身相连的神经元，则有：
 
 $$
@@ -408,4 +407,3 @@ $$
 =\sum_{c=1}^C\frac{\partial \mathcal{L}}{\partial s_c^t}\frac{\partial s_c^t}{\partial b_\iota^t}\frac{\partial b_\iota^t}{\partial a_\iota^t}
 =f'(a_\iota^t)\sum_{c=1}^C g(a_c^{t-1})\epsilon_s^t
 $$
-
