@@ -1,13 +1,16 @@
 ---
 layout: post
 category:  dpLearning
-title: "关于LSTM的理解“
+title: 关于LSTM的理解
 tags: LSTM
 author: EthanCao
 ---
 
 * content
 {:toc}
+
+
+
 
 > 观点均学习自以下文章：
 >

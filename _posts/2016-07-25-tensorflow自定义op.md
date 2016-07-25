@@ -9,6 +9,9 @@ tags: tensorflow python
 * content
 {:toc}
 
+
+
+
 看到tensorflow官方教程中word2vec.py中这里不太明白，涉及到自定义op，查了一些资料，中文较少，所以记录一下。
 
 ```python
