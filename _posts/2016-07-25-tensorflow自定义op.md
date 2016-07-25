@@ -3,7 +3,7 @@ layout: post
 title:  "tensorflow自定义op"
 date:   2016-07-25 15:14:54
 category: coding
-tags: tensorflow python
+tags: [tensorflow, python]
 ---
 
 # Tensorflow自定义op
@@ -111,6 +111,7 @@ ops.RegisterShape("Skipgram")(None)
 
    with tf.Session(''):
      print zero_out([[1, 2], [3, 4]]).eval()
+   ```
 
 
    #print
@@ -118,3 +119,5 @@ ops.RegisterShape("Skipgram")(None)
     [0 0]]
    ```
 
+
+   ```
