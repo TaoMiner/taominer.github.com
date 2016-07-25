@@ -1,13 +1,16 @@
 ---
 layout: post
-category: machine learning
-title: learning LSTM
+category:  dpLearning
+title: "关于LSTM的理解“
+tags: LSTM
+author: EthanCao
 ---
 
-## 关于LSTM的理解
+* content
+{:toc}
 
 > 观点均学习自以下文章：
-> 
+>
 > - Alex Graves大神的博士论文 ["Supervised sequence learning with RNN"](http://www.cs.toronto.edu/~graves/preprint.pdf);
 > - LSTM 原始论文 “Long short-term memory”
 > - [知乎上推荐的lstm公式推导](http://blog.csdn.net/a635661820/article/details/45390671)
@@ -22,11 +25,9 @@ LSTM(long short-term memory)长短期记忆模型是RNN(Recurrent Neural Network
 
 ANN网络中没有循环被称为FNN（Feedforword Neural Networks）。下图展示了前馈FNN（左侧）和循环神经网络RNN（右侧）的对比。
 
-![MLP example](/public/img/posts/DPLearning/MLP.png)![RNN](/public/img/posts/DPLearning/RNN.png)
+![MLP example](/img/posts/DPLearning/MLP.png)![RNN](/img/posts/DPLearning/RNN.png)
 
-
-
-MLP多层感知机是一种被广泛使用的FNN，网络中每一个节点都是一个perceptron。perceptron是一个最简单的人工神经网络模型，节点中使用的函数是线性模型，属于线性的二元分类器，感兴趣的同学可以去[wiki](https://zh.wikipedia.org/wiki/%E6%84%9F%E7%9F%A5%E5%99%A8)了解下。在MLP中，节点中可以使用哪些函数呢？比如常见的有： ![node_function](/public/img/posts/DPLearning/node_function.png)
+MLP多层感知机是一种被广泛使用的FNN，网络中每一个节点都是一个perceptron。perceptron是一个最简单的人工神经网络模型，节点中使用的函数是模型，属于线性的二元分类器，感兴趣的同学可以去[wiki](https://zh.wikipedia.org/wiki/%E6%84%9F%E7%9F%A5%E5%99%A8)了解下。在MLP中，节点中可以使用哪些函数呢？比如常见的有： ![node_function](/img/posts/DPLearning/node_function.png)
 
 1. 这个函数应该比较简单，符合单个神经元的特点，同时也没必要复杂，因为一个复杂的神经元又可以转换为若干个简单的神经元；
 2. 使用线性还是非线性的呢？这里我们再回头看一下网络图，除了节点中的运算，网络还存在另一种运算，即节点i到j的边上的运算。这个运算是简单的线性乘法: $a_j=\omega_{ij}b_i$，其中**a和b分别代表一个节点的输入和输出**。（牢记这个，否则下面的公式容易混）。因此，若节点中也使用线性函数，则整个网络结构无论怎么调整，依旧是线性函数。这大大限制了MLP的作用。所以使用非线性函数。
@@ -159,11 +160,11 @@ $$
 然后，按照这个公式依次向前求解。
 
 > 特别的，由于这里的求导公式比较复杂，容易出错，我们可以使用symmetrical finite difference技术来验证求解是否正确。其实，这个技术就是高数中导数的定义：
-> 
+>
 > $$
 > \frac{\partial \mathcal{L}}{\partial w{ij}}=\frac{\mathcal{L(w{ij}+\epsilon)-L(w_{ij}-\epsilon)}}{2\epsilon}+\mathcal{O}(\epsilon^2)
 > $$
-> 
+>
 > 其中$\epsilon$不能太小，否则引发浮点计算下溢。
 
 ### RNN
@@ -172,7 +173,7 @@ $$
 
 这节以只有一层隐藏单元的RNN为例。为了更直观的理解，下图给出了unfolding的RNN图。
 
-![unfolding_RNN](/public/img/posts/DPLearning/unfolding_RNN.png)
+![unfolding_RNN](/img/posts/DPLearning/unfolding_RNN.png)
 
 注意，在不同时刻，网络中的权重被重用。
 
@@ -255,7 +256,7 @@ $$
 
 还是先看个memory block的直观图解以及具有两个memory block的lstm网络。
 
- ![memory_block](/public/img/posts/DPLearning/memory_block.png)![lstm](/public/img/posts/DPLearning/lstm.png)
+ ![memory_block](/img/posts/DPLearning/memory_block.png)![lstm](/img/posts/DPLearning/lstm.png)
 
 #### Vanishing gradient problem
 
