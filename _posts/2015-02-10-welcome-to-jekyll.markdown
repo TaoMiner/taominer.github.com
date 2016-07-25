@@ -2,17 +2,11 @@
 layout: post
 title:  "hello jekyll!"
 date:   2015-02-10 15:14:54
-category: Jekyll
-tags: tag1 tag2
+category: 随笔
+tags: 杂文
 ---
 
-# hello
+# 第一篇博客
 
-this is a test!
-
-this is a equation:
-
-$$
-E^2=mc
-$$
+从今天开始记录一些事情，希望能坚持下去。
 
