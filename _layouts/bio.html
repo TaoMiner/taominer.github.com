@@ -1,0 +1,60 @@
+---
+layout: default
+---
+
+<div class="page clearfix" post>
+    <div class="left">
+        
+        <div class="jumbotron">
+            <div class="container">
+                <img height="180" src="/img/avatar.JPG" align="left" hspace="6" style="margin-left:-6p;margin-right:20px">
+                <b> <font size="5"> Ethan Cao 曹艺馨 </font> </b>
+                <p></p>
+                <p> <i>Ph.D. Student</i> </p>
+                <p> <i><a href="http://www.cs.tsinghua.edu.cn/">Department of Computer Science and Technology</a></i> </p>
+                <p> <i><a href="http://www.tsinghua.edu.cn">Tsinghua University</a></i> </p>
+                <p> <i> <b> Email:</b> caoyixin2009@163.com </i> </p>
+                <div class="container">
+                <p></p>
+                <hr>
+                <article itemscope itemtype="http://schema.org/BlogPosting">
+                {{content}}
+                </article>
+                <hr>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    <button class="anchor"><i class="fa fa-anchor"></i></button>
+    <div class="right">
+        <div class="wrap">
+
+            <!-- Content -->
+            <div class="side content">
+                <div>
+                    Content
+                </div>
+                <ul id="content-side" class="content-ul">
+                    
+                </ul>
+            </div>
+            <!-- 其他div框放到这里 -->
+            <!-- <div class="side">bbbb</div> -->
+        </div>
+    </div>
+</div>
+
+<script>
+/**
+ * target _blank
+ */
+(function() {
+    var aTags = document.querySelectorAll('article a:not([id])')
+    for (var i = 0; i < aTags.length; i++) {
+        aTags[i].setAttribute('target', '_blank')
+    }
+}());
+</script>
+<script src="{{ "/js/pageContent.js " | prepend: site.baseurl }}" charset="utf-8"></script>
