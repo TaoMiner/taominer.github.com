@@ -1,6 +1,6 @@
 ---
 layout: post
-category:  dpLearning
+category:  [Deep Learning]
 title: 关于LSTM的理解
 tags: LSTM
 author: EthanCao

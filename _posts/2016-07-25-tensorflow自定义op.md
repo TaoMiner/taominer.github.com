@@ -3,7 +3,7 @@ layout: post
 title:  tensorflow自定义op
 date:   2016-07-25 15:14:54
 category: coding
-tags: tensorflow python
+tags: [tensorflow,python]
 ---
 
 * content
