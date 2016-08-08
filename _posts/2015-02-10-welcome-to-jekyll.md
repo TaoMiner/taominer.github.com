@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "第一篇博客"
+title:  第一篇博客
 date:   2015-02-10 11:40:18 +0800
 categories: 随笔
 tags: 杂文
