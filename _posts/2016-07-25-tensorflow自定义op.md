@@ -122,3 +122,10 @@ ops.RegisterShape("Skipgram")(None)
    ```
 
 
+#### 可能的问题
+
+### no member named 'GetAttr' in 'tensorflow::OpKernelContext'
+
+这是因为tensorflow的op需要用属性进行初始化，因此GetAttr这个方法只能放在构造函数中，如果放在了compute函数就会报错。这也是属性和输入一个不同之处。
+
+3500:100000
